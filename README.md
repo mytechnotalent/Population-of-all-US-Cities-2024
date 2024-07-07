@@ -352,7 +352,7 @@ plt.show()
 
 
     
-![png](population-of-all-us-cities-2024_files/population-of-all-us-cities-2024_11_0.png)
+![png](population-of-all-us-cities-2024_files/population-of-all-us-cities-2024_10_0.png)
     
 
 
