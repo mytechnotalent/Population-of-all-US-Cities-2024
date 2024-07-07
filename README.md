@@ -43,6 +43,9 @@ We will use the KNeighborsRegressor model for this task. KNeighborsRegressor is 
 
 
 ```python
+import os
+import requests
+import zipfile
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -53,8 +56,34 @@ import matplotlib.pyplot as plt
 
 
 ```python
+# Download and extract the dataset
+url = 'https://www.kaggle.com/api/v1/datasets/download/dataanalyst001/population-of-all-us-cities-2024?datasetVersionNumber=2'
+local_filename = 'archive.zip'
+response = requests.get(url, stream=True)
+if response.status_code == 200:
+    with open(local_filename, 'wb') as f:
+        for chunk in response.iter_content(chunk_size=8192):
+            f.write(chunk)
+    print(f'Download completed: {local_filename}')
+else:
+    print(f'Failed to download the file. Status code: {response.status_code}')
+if response.status_code == 200:
+    with zipfile.ZipFile(local_filename, 'r') as zip_ref:
+        zip_ref.extractall('.')
+    print('Unzipping completed')
+else:
+    print('Skipping unzipping due to download failure')
+
+```
+
+    Download completed: archive.zip
+    Unzipping completed
+
+
+
+```python
 # Load the dataset
-data = pd.read_csv('/kaggle/input/population-of-all-us-cities-2024/Population of all US Cities 2024.csv')
+data = pd.read_csv('Population of all US Cities 2024.csv')
 ```
 
 
@@ -67,19 +96,6 @@ data.head()
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -180,19 +196,6 @@ data
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -331,7 +334,7 @@ model.score(X_test, y_test)
 
 
 
-    0.7368134140534087
+    0.7921830174519234
 
 
 
@@ -349,7 +352,7 @@ plt.show()
 
 
     
-![png](population-of-all-us-cities-2024_files/population-of-all-us-cities-2024_10_0.png)
+![png](population-of-all-us-cities-2024_files/population-of-all-us-cities-2024_11_0.png)
     
 
 
@@ -375,5 +378,5 @@ predicted_metrics = loaded_model.predict(washington_dc_data_df)
 print(f"Predicted Annual Change: {predicted_metrics}")
 ```
 
-    Predicted Annual Change: [-0.0195]
+    Predicted Annual Change: [-0.00503874]
 
