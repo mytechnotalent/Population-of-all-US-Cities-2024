@@ -59,7 +59,7 @@ import matplotlib.pyplot as plt
 
 ```python
 # Download and extract the dataset
-url = 'https://www.kaggle.com/api/v1/datasets/download/dataanalyst001/population-of-all-us-cities-2024?datasetVersionNumber=2'
+url = 'https://www.kaggle.com/api/v1/datasets/download/dataanalyst001/population-of-all-us-cities-2024?datasetVersionNumber=1'
 local_filename = 'archive.zip'
 response = requests.get(url, stream=True)
 if response.status_code == 200:
