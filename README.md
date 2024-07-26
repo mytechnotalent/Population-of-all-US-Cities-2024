@@ -81,9 +81,6 @@ data = pd.read_csv('Population of all US Cities 2024.csv')
 
 # Observe data
 data.head()
-
-# Observe data size
-data.shape
 ```
 
     Download completed: archive.zip
@@ -93,7 +90,81 @@ data.shape
 
 
 
-    (300, 8)
+<div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Rank</th>
+      <th>US City</th>
+      <th>US State</th>
+      <th>Population 2024</th>
+      <th>Population 2020</th>
+      <th>Annual Change</th>
+      <th>Density (/mile2)</th>
+      <th>Area (mile2)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>New York</td>
+      <td>New York</td>
+      <td>8097282</td>
+      <td>8740292</td>
+      <td>-0.0195</td>
+      <td>26950</td>
+      <td>300.46</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Los Angeles</td>
+      <td>California</td>
+      <td>3795936</td>
+      <td>3895848</td>
+      <td>-0.0065</td>
+      <td>8068</td>
+      <td>470.52</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Chicago</td>
+      <td>Illinois</td>
+      <td>2638159</td>
+      <td>2743329</td>
+      <td>-0.0099</td>
+      <td>11584</td>
+      <td>227.75</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Houston</td>
+      <td>Texas</td>
+      <td>2319119</td>
+      <td>2299269</td>
+      <td>0.0021</td>
+      <td>3620</td>
+      <td>640.61</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Phoenix</td>
+      <td>Arizona</td>
+      <td>1662607</td>
+      <td>1612459</td>
+      <td>0.0076</td>
+      <td>3208</td>
+      <td>518.33</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 
 
@@ -133,7 +204,7 @@ model.score(X_test, y_test)
 
 
 
-    0.7443018649960422
+    0.8527974958533183
 
 
 
