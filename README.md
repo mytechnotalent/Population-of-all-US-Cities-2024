@@ -54,6 +54,8 @@ import pickle
 import matplotlib.pyplot as plt
 ```
 
+## Step 1: Data Preparation
+
 
 ```python
 # Download and extract the dataset
@@ -74,109 +76,19 @@ if response.status_code == 200:
 else:
     print('Skipping unzipping due to download failure')
 
+# Load the dataset
+data = pd.read_csv('Population of all US Cities 2024.csv')
+
+# Observe data
+data.head()
+
+# Observe data size
+data.shape
 ```
 
     Download completed: archive.zip
     Unzipping completed
 
-
-
-```python
-# Load the dataset
-data = pd.read_csv('Population of all US Cities 2024.csv')
-```
-
-
-```python
-# Observe data
-data.head()
-```
-
-
-
-
-<div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Rank</th>
-      <th>US City</th>
-      <th>US State</th>
-      <th>Population 2024</th>
-      <th>Population 2020</th>
-      <th>Annual Change</th>
-      <th>Density (/mile2)</th>
-      <th>Area (mile2)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>New York</td>
-      <td>New York</td>
-      <td>8097282</td>
-      <td>8740292</td>
-      <td>-0.0195</td>
-      <td>26950</td>
-      <td>300.46</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>Los Angeles</td>
-      <td>California</td>
-      <td>3795936</td>
-      <td>3895848</td>
-      <td>-0.0065</td>
-      <td>8068</td>
-      <td>470.52</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>Chicago</td>
-      <td>Illinois</td>
-      <td>2638159</td>
-      <td>2743329</td>
-      <td>-0.0099</td>
-      <td>11584</td>
-      <td>227.75</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>Houston</td>
-      <td>Texas</td>
-      <td>2319119</td>
-      <td>2299269</td>
-      <td>0.0021</td>
-      <td>3620</td>
-      <td>640.61</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>Phoenix</td>
-      <td>Arizona</td>
-      <td>1662607</td>
-      <td>1612459</td>
-      <td>0.0076</td>
-      <td>3208</td>
-      <td>518.33</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-```python
-# Observe data size
-data.shape
-```
 
 
 
@@ -185,138 +97,25 @@ data.shape
 
 
 
+## Step 2: Feature Engineering
+
 
 ```python
 # Drop unnecessary features
 data = data.drop(["Rank", "US City", "US State"], axis=1)
 data
-```
 
-
-
-
-<div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Population 2024</th>
-      <th>Population 2020</th>
-      <th>Annual Change</th>
-      <th>Density (/mile2)</th>
-      <th>Area (mile2)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>8097282</td>
-      <td>8740292</td>
-      <td>-0.0195</td>
-      <td>26950</td>
-      <td>300.46</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>3795936</td>
-      <td>3895848</td>
-      <td>-0.0065</td>
-      <td>8068</td>
-      <td>470.52</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2638159</td>
-      <td>2743329</td>
-      <td>-0.0099</td>
-      <td>11584</td>
-      <td>227.75</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2319119</td>
-      <td>2299269</td>
-      <td>0.0021</td>
-      <td>3620</td>
-      <td>640.61</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1662607</td>
-      <td>1612459</td>
-      <td>0.0076</td>
-      <td>3208</td>
-      <td>518.33</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>295</th>
-      <td>110878</td>
-      <td>110094</td>
-      <td>0.0018</td>
-      <td>2982</td>
-      <td>37.18</td>
-    </tr>
-    <tr>
-      <th>296</th>
-      <td>110803</td>
-      <td>111899</td>
-      <td>-0.0025</td>
-      <td>1961</td>
-      <td>56.49</td>
-    </tr>
-    <tr>
-      <th>297</th>
-      <td>110801</td>
-      <td>108889</td>
-      <td>0.0043</td>
-      <td>3036</td>
-      <td>36.49</td>
-    </tr>
-    <tr>
-      <th>298</th>
-      <td>110463</td>
-      <td>111477</td>
-      <td>-0.0023</td>
-      <td>5979</td>
-      <td>18.48</td>
-    </tr>
-    <tr>
-      <th>299</th>
-      <td>110055</td>
-      <td>109782</td>
-      <td>0.0006</td>
-      <td>4825</td>
-      <td>22.81</td>
-    </tr>
-  </tbody>
-</table>
-<p>300 rows × 5 columns</p>
-</div>
-
-
-
-
-```python
 # Split into X, y
 X = data.drop("Annual Change", axis=1)
 y = data["Annual Change"]
-```
 
-
-```python
 # Split the data into training and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, 
                                                     y, 
                                                     test_size=0.2)
 ```
+
+## Step 3: Modeling
 
 
 ```python
@@ -334,9 +133,11 @@ model.score(X_test, y_test)
 
 
 
-    0.7921830174519234
+    0.7443018649960422
 
 
+
+## Step 4: Visualization
 
 
 ```python
@@ -356,6 +157,8 @@ plt.show()
     
 
 
+## Step 5: Save & Load Model
+
 
 ```python
 # Save model 
@@ -368,6 +171,8 @@ pickle.dump(model, open("model.pkl", "wb"))
 loaded_model = pickle.load(open("model.pkl", "rb"))
 ```
 
+## Step 6: Inference
+
 
 ```python
 # Inference
@@ -378,5 +183,4 @@ predicted_metrics = loaded_model.predict(washington_dc_data_df)
 print(f"Predicted Annual Change: {predicted_metrics}")
 ```
 
-    Predicted Annual Change: [-0.00503874]
-
+    Predicted Annual Change: [-0.00375231]
